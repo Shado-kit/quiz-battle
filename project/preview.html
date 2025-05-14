@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Prévisualisation</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Aperçu du Quiz</h1>
+    <div id="quizPreview"></div>
+    <button id="backBtn" class="btn-secondary">Retour à l'éditeur</button>
+  </div>
+  <script>
+    document.getElementById('backBtn').addEventListener('click', () => {
+      window.history.back();
+    });
+
+    // Exemple de contenu dynamique (à remplacer par vos données)
+    document.getElementById('quizPreview').innerHTML = `
+      <h2>Culture G 2024</h2>
+      <p><strong>Type :</strong> Plusieurs Manches</p>
+      <p><strong>Mode :</strong> Aléatoire (Catégories: Sport, Histoire)</p>
+    `;
+  </script>
+</body>
+</html>

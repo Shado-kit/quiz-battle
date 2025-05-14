@@ -1,0 +1,44 @@
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 600px;
+  top: 250px;
+}
+
+.buttons div {
+  background-color: aliceblue;
+  padding: 15px 30px;
+  margin-bottom: 40px;
+  border-radius: 10px;
+  transform: scale(1.5);
+}
+
+.new_quiz {
+  background-image: url(img/but.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  color: white;
+}
+
+a {
+  color: inherit;          /* Garde la couleur du parent */
+  text-decoration: none;
+  
+}
+
+a:hover {
+  color: inherit;          /* Garde la couleur du parent */
+  text-decoration: none;
+  transform: scale(1.1);
+  transition: ease-in-out;
+}
+
+.load_quiz {
+  border: 1px blue solid;
+}
+

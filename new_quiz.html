@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Création de Quiz</title>
+    <style>
+        
+        h1 {
+            color: #0080ff;
+            
+        }
+
+        .choices {
+          display: flex;
+        }
+
+        .choice-title {
+            font-size: 15px;
+            color: #383838;
+            margin-top: 25px;
+            margin-left: 10px;
+        }
+    
+        .quiz-section {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        select, .category-list {
+            width: 100%;
+            padding: 5px;
+            border-radius: 10px;
+            font-size: 16px;
+            background-color: #f3f3f3;
+            border: none;
+        }
+
+        .form-group {
+          margin-left: 50px;
+          display: flex;
+        }
+
+        .category-list {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 10px;
+        }
+
+        .category-item {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .category-item:last-child {
+            border-bottom: none;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+
+        .btn-manual {
+            background-color: rgb(255, 255, 255);
+            color: rgb(59, 59, 59);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-generate {
+            background-image: url('img/but.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-manual::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0,0.3);
+        }
+
+        .btn-manual span {
+            position: relative;
+            z-index: 1;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background-color: #ddd;
+            margin: 25px 0;
+        }
+    </style>
+    <link rel="stylesheet" href="globals.css" />
+</head>
+<body>
+    <h1>Nouveau quiz</h1>
+    <input type="text" id="quiz-title" placeholder="Titre du quiz" class="form-control" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 10px; font-size: 16px; margin-bottom: 20px;">
+    <div class="quiz-section">
+        <div class="choices">
+          
+          <div class="form-group">
+            <div class="choice-title">Questionsliv>
+            <select id="question-count">
+                <option value="5" selected>5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+                <option value="50">50</option>
+            </select>
+          </div>
+          
+          
+          <div class="form-group">
+            <div class="choice-title">Niveau</div>
+            <select id="difficulty">
+                <option value="facile">Facile</option>
+                <option value="moyen">Moyen</option>
+                <option value="difficile">Difficile</option>
+            </select>
+          </div>
+          
+          
+        </div>
+
+
+        <h2>Choisissez la catégorie</h2>
+        <ul class="category-list">
+            <li class="category-item">
+                <input type="checkbox" id="all-categories" checked>
+                <label for="all-categories"><strong>Tous</strong></label>
+                <ul class="subcategory-list">
+                    <li class="category-item">Divertissement</li>
+                </ul>
+            </li>
+            <li class="category-item">
+                <input type="checkbox" id="sport">
+                <label for="sport"><strong>Sport</strong></label>
+                <ul class="subcategory-list">
+                    <li class="category-item">Histoire</li>
+                </ul>
+            </li>
+            <li class="category-item">
+                <input type="checkbox" id="culture">
+                <label for="culture"><strong>Culture générale</strong></label>
+                <ul class="subcategory-list">
+                    <li class="category-item">Technologie</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <hr>
+
+    <div class="button-group">
+        <button id="generate-btn" class="btn btn-generate">Générer</button>
+        <button id="manual-btn" class="btn btn-manual"><span>Saisie manuelle</span></button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Gestionnaire d'événement pour le bouton Générer
+            document.getElementById('generate-btn').addEventListener('click', function() {
+                const title = document.getElementById('quiz-title').value;
+                const questionCount = document.getElementById('question-count').value;
+                const difficulty = document.getElementById('difficulty').value;
+                
+                // Récupération des catégories sélectionnées
+                const categories = [];
+                document.querySelectorAll('.category-list input[type="checkbox"]:checked').forEach(checkbox => {
+                    categories.push(checkbox.nextElementSibling.textContent.trim());
+                });
+                
+                console.log('Quiz à générer:', {
+                    title,
+                    questionCount,
+                    difficulty,
+                    categories
+                });
+                
+                alert(`Quiz "${title}" avec ${questionCount} questions (${difficulty}) sera généré!`);
+            });
+            
+            // Gestionnaire d'événement pour le bouton Saisie manuelle
+            document.getElementById('manual-btn').addEventListener('click', function() {
+                alert('Mode saisie manuelle activé!');
+                // Ici vous pourriez rediriger vers une autre page ou afficher un formulaire
+            });
+            
+            // Gestion de la sélection "Tous"
+            document.getElementById('all-categories').addEventListener('change', function(e) {
+                const checkboxes = document.querySelectorAll('.category-list input[type="checkbox"]');
+                checkboxes.forEach(checkbox => {
+                    if (checkbox !== e.target) {
+                        checkbox.checked = !e.target.checked;
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
